@@ -1,18 +1,18 @@
-package si.xlab.research.emmy.myapplication.activities;
+package si.xlab.research.emmy.demo.activities;
 
 import mobile.CACertificate;
 import mobile.Credential;
 import mobile.OrgPubKeys;
 import mobile.Pseudonym;
-import si.xlab.research.emmy.myapplication.Config;
-import si.xlab.research.emmy.myapplication.R;
-import si.xlab.research.emmy.myapplication.client.CSPaillier;
-import si.xlab.research.emmy.myapplication.client.Pedersen;
-import si.xlab.research.emmy.myapplication.client.PedersenEC;
-import si.xlab.research.emmy.myapplication.client.Pseudonymsys;
-import si.xlab.research.emmy.myapplication.client.PseudonymsysCA;
-import si.xlab.research.emmy.myapplication.client.Schnorr;
-import si.xlab.research.emmy.myapplication.client.SchnorrEC;
+import si.xlab.research.emmy.demo.Config;
+import si.xlab.research.emmy.demo.R;
+import si.xlab.research.emmy.demo.client.CSPaillier;
+import si.xlab.research.emmy.demo.client.Pedersen;
+import si.xlab.research.emmy.demo.client.PedersenEC;
+import si.xlab.research.emmy.demo.client.Pseudonymsys;
+import si.xlab.research.emmy.demo.client.PseudonymsysCA;
+import si.xlab.research.emmy.demo.client.Schnorr;
+import si.xlab.research.emmy.demo.client.SchnorrEC;
 
 import android.content.Context;
 import android.content.Intent;

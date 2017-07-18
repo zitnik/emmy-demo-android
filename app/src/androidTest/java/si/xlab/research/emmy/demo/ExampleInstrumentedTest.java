@@ -1,4 +1,4 @@
-package si.xlab.research.emmy.myapplication;
+package si.xlab.research.emmy.demo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,7 +21,7 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("si.xlab.research.emmy.myapplication", appContext.getPackageName());
+        assertEquals("si.xlab.research.emmy.si.xlab.research.emmy.demo", appContext.getPackageName());
     }
 
 }

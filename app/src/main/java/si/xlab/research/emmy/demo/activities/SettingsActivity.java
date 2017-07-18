@@ -1,10 +1,10 @@
-package si.xlab.research.emmy.myapplication.activities;
+package si.xlab.research.emmy.demo.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
 
-import si.xlab.research.emmy.myapplication.R;
+import si.xlab.research.emmy.demo.R;
 
 public class SettingsActivity extends AppCompatActivity {
 

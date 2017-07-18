@@ -1,4 +1,4 @@
-package si.xlab.research.emmy.myapplication.client;
+package si.xlab.research.emmy.demo.client;
 
 import client.Client;
 import client.CSPaillierClient;

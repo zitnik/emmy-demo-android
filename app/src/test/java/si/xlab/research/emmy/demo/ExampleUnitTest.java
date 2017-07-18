@@ -1,4 +1,4 @@
-package si.xlab.research.emmy.myapplication;
+package si.xlab.research.emmy.demo;
 
 import org.junit.Test;
 

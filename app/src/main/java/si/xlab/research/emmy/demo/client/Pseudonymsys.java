@@ -1,4 +1,4 @@
-package si.xlab.research.emmy.myapplication.client;
+package si.xlab.research.emmy.demo.client;
 
 import mobile.PseudonymsysClientWrapper;
 import mobile.CACertificate;

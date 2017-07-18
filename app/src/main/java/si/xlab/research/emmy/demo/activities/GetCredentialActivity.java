@@ -1,4 +1,4 @@
-package si.xlab.research.emmy.myapplication.activities;
+package si.xlab.research.emmy.demo.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import com.eclipsesource.v8.V8;
 
 import java.io.InputStream;
 
-import si.xlab.research.emmy.myapplication.R;
+import si.xlab.research.emmy.demo.R;
 
 
 public class GetCredentialActivity extends AppCompatActivity {

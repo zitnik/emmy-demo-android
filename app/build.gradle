@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
     defaultConfig {
-        applicationId "si.xlab.research.emmy.myapplication"
+        applicationId "si.xlab.research.emmy.si.xlab.research.emmy.demo"
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1

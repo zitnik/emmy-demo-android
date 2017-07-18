@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="si.xlab.research.emmy.myapplication">
+    package="si.xlab.research.emmy.demo">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity">
+        <activity android:name="si.xlab.research.emmy.demo.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,13 +19,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.SettingsActivity"
+            android:name="si.xlab.research.emmy.demo.activities.SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity android:name=".activities.AnonymousCredentialActivity" />
-        <activity android:name=".activities.TransferCredentialActivity" />
-        <activity android:name=".activities.GetCredentialActivity" />
-        <activity android:name=".activities.ExampleActivity" />
-        <activity android:name=".activities.PseudonymsysActivity"></activity>
+        <activity android:name="si.xlab.research.emmy.demo.activities.AnonymousCredentialActivity" />
+        <activity android:name="si.xlab.research.emmy.demo.activities.GetCredentialActivity" />
+        <activity android:name="si.xlab.research.emmy.demo.activities.ExampleActivity" />
     </application>
 
 </manifest>
