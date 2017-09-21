@@ -1,10 +1,10 @@
 # IP and port of the gRPC server
-# port is needed by the server
-# ip and port are needed by the clients, so that they know where to contact the server
-ip: 172.16.118.251
+# port is needed by the cacert
+# ip and port are needed by the clients, so that they know where to contact the cacert
+ip: 10.10.43.45
 port: 7007
 
-# Timeout (in seconds) for connections to emmy server
+# Timeout (in seconds) for connections to emmy cacert
 timeout: 5
 
 # Absolute path to the folder where secret and public keys are serialized to

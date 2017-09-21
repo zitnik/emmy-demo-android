@@ -1,5 +1,6 @@
 package si.xlab.research.emmy.demo.client;
 
+import mobile.PseudonymsysCAClientWrapper;
 import mobile.PseudonymsysClientWrapper;
 import mobile.CACertificate;
 import mobile.Pseudonym;
@@ -14,7 +15,7 @@ public class Pseudonymsys {
         client = new PseudonymsysClientWrapper(endpoint);
     }
 
-    public Pseudonym registerWithCA(String secret, CACertificate cert) throws Exception {
+    public Pseudonym registerWithOrg(String secret, CACertificate cert) throws Exception {
        return client.generateNym(secret, cert);
     }
 

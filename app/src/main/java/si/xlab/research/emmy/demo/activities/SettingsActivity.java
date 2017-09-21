@@ -16,6 +16,7 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         serverIP = (EditText) findViewById(R.id.editText_server_ip);
-        //serverIP.set
+
     }
+
 }

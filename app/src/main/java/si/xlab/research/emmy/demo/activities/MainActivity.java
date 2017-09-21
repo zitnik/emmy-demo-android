@@ -37,52 +37,55 @@ public class MainActivity extends AppCompatActivity {
 
     private static String TAG = "MainActivity";
     private static Config emmyConfig;
+    private static String val = "121212121"; // secret provided by the user
 
-    private Button btnSettings, btnExamplePsys;
+    private Button btnSettings, btnExamplePsys, btnExampleSchnorr, btnExampleSchnorrEC,
+        btnExamplePedersen, btnExamplePedersenEC, btnExampleCSPaillier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loadEmmyConfig();
 
         btnSettings = (Button)findViewById(R.id.button_settings);
         btnSettings.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                Intent getCredentialIntent = new Intent(getApplicationContext(), SettingsActivity.class);
-                startActivity(getCredentialIntent);
+                Intent settingsIntent = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(settingsIntent);
             }
         });
+
+        btnExamplePsys = (Button) findViewById(R.id.button_example_psys);
+        btnExamplePsys.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    doPseudonymsys();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        btnExampleSchnorr = (Button) findViewById(R.id.button_example_schnorr);
+        btnExampleSchnorrEC = (Button) findViewById(R.id.button_example_schnorr_ec);
+        btnExamplePedersen = (Button) findViewById(R.id.button_example_pedersen);
+        btnExamplePedersenEC = (Button) findViewById(R.id.button_example_pedersen_ec);
+        btnExampleCSPaillier = (Button) findViewById(R.id.button_example_cspaillier);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        String val = "121212121";
-
-        try {
-            doPseudonymsys();
-            /*doPedersen(val);
-            doPedersenEC(val);
-            doSchnorr(val, "sigma");
-            doSchnorr(val, "zkp");
-            doSchnorr(val, "zkpok");
-            doSchnorrEC(val, "sigma");
-            doSchnorrEC(val, "zkp");
-            doSchnorrEC(val, "zkpok");
-            doCSPaillier(8685849, 340002223);*/
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        loadEmmyConfig();
+        val = "121212121";
     }
 
     void loadEmmyConfig() {
         String tag = TAG + " parseEmmyConfig";
 
         InputStream configFile = this.getResources().openRawResource(R.raw.defaults);
-
         try {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
             byte[] configFileContent = IOUtils.toByteArray(configFile);
@@ -97,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Call with doPedersen(val);
     void doPedersen(String val) throws Exception {
         Map<String,String> pedersenConfig = emmyConfig.getPedersen();
 
@@ -111,11 +115,16 @@ public class MainActivity extends AppCompatActivity {
         pedersen.Run();
     }
 
+    // call with doPedersenEC(val);
     void doPedersenEC(String val) throws Exception {
         PedersenEC pedersenEc = new PedersenEC(emmyConfig.getEndpoint(), val);
         pedersenEc.Run();
     }
 
+    // call with any of
+    //  doSchnorr(val, "sigma");
+    //  doSchnorr(val, "zkp");
+    //  doSchnorr(val, "zkpok");
     void doSchnorr(String val, String variant) throws Exception {
         Map<String,String> schnorrConfig = emmyConfig.getSchnorr();
 
@@ -129,11 +138,16 @@ public class MainActivity extends AppCompatActivity {
         schnorr.Run();
     }
 
+    // call with any of
+    //  doSchnorrEC(val, "sigma");
+    //  doSchnorrEC(val, "zkp");
+    //  doSchnorrEC(val, "zkpok");
     void doSchnorrEC(String val, String variant) throws Exception {
         SchnorrEC schnorrEC = new SchnorrEC(emmyConfig.getEndpoint(), variant, val);
         schnorrEC.Run();
     }
 
+    // call with doCSPaillier(8685849, 340002223);
     void doCSPaillier(int maxM, int maxL) {
         // read public key
         // TODO: generate this on the fly
@@ -164,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void doPseudonymsys() {
+    void doPseudonymsys() throws Exception {
         Map<String,String> pseudonymsysDefaults = emmyConfig.getPseudonymsys();
 
         String userSecret = pseudonymsysDefaults.get("user1");
@@ -176,23 +190,35 @@ public class MainActivity extends AppCompatActivity {
         Log.d("H2", orgH2);
 
         try {
-            PseudonymsysCA ca = new PseudonymsysCA(emmyConfig.getEndpoint());
-            CACertificate caCert = ca.getCertificate(userSecret, masterNymA, masterNymB);
-            Log.d("doPseudonymSys", "Obtained CA Certificate");
+            // TODO - mobile client implemented in Go code currently doesn't use caCert,
+            //  e.g. all connections from mobile clients are insecure
+            /*String caCertName = "cacert.pem";
+            InputStream caCertKeyContent = this.getResources().openRawResource(R.raw.cacert);
+            FileOutputStream outStream = openFileOutput(caCertName, Context.MODE_PRIVATE);
+            outStream.write(IOUtils.toByteArray(caCertKeyContent));
+            outStream.close();
+            String caCertPath = new File(getFilesDir().getPath(), caCertName).getAbsolutePath();*/
+
+            PseudonymsysCA caClientA = new PseudonymsysCA(emmyConfig.getEndpoint());
+            PseudonymsysCA caClientB = new PseudonymsysCA(emmyConfig.getEndpoint());
+
+            CACertificate caCertA = caClientA.getCertificate(userSecret, masterNymA, masterNymB);
+            CACertificate caCertB = caClientB.getCertificate(userSecret, masterNymA, masterNymB);
+            Log.d("doPseudonymSys", "Obtained CA Certificates");
 
             Pseudonymsys pseudonymClientA = new Pseudonymsys(emmyConfig.getEndpoint());
             Pseudonymsys pseudonymClientB = new Pseudonymsys(emmyConfig.getEndpoint());
 
-            Pseudonym pseudonymA = pseudonymClientA.registerWithCA(userSecret, caCert);
-            Pseudonym pseudonymB = pseudonymClientB.registerWithCA(userSecret, caCert);
-            Log.d("doPseudonymSys", "Obtained Nyms A and B");
+            Pseudonym pseudonymA = pseudonymClientA.registerWithOrg(userSecret, caCertA);
+            Pseudonym pseudonymB = pseudonymClientB.registerWithOrg(userSecret, caCertB);
+            Log.d("doPseudonymSys", "Obtained Nyms for organizations A and B (REGISTRATION)");
 
             OrgPubKeys orgPubKeys = new OrgPubKeys(orgH1, orgH2);
             Credential credential = pseudonymClientA.obtainCredential(userSecret, pseudonymA, orgPubKeys);
-            Log.d("doPseudonymSys", "Obtained Credential " + credential.toString());
+            Log.d("doPseudonymSys", "Obtained Anonymous Credential for authentication with organization A " + credential.toString());
 
             boolean result = pseudonymClientB.transferCredential("org1", userSecret, pseudonymB, credential);
-            Log.d("doPseudonymSys", "Transferred Credential, authenticated: " + result);
+            Log.d("doPseudonymSys", "Transferred Anonymous Credential for authentication with organization A, authenticated with organization B: " + result);
         } catch (Exception e) {
             e.printStackTrace();
         }
