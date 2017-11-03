@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/PseudonymsysDemo.iml" filepath="$PROJECT_DIR$/PseudonymsysDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/emmy/emmy.iml" filepath="$PROJECT_DIR$/emmy/emmy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emmy-demo-android.iml" filepath="$PROJECT_DIR$/emmy-demo-android.iml" />
     </modules>
   </component>
 </project>

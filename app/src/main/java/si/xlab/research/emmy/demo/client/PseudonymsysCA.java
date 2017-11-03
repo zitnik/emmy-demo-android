@@ -5,7 +5,7 @@ import mobile.Mobile;
 
 public class PseudonymsysCA
 {
-    private mobile.PseudonymsysCAClientWrapper client;
+    private mobile.PseudonymsysCAClient client;
 
     public PseudonymsysCA(String endpoint)
             throws Exception {
