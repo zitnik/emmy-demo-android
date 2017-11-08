@@ -112,18 +112,16 @@ public class MainActivity extends AppCompatActivity {
             outStream.close();
             String caCertPath = new File(getFilesDir().getPath(), caCertName).getAbsolutePath();*/
 
-            PseudonymsysCA caClientA = new PseudonymsysCA(emmyConfig.getEndpoint());
-            PseudonymsysCA caClientB = new PseudonymsysCA(emmyConfig.getEndpoint());
+            PseudonymsysCA caClient = new PseudonymsysCA(emmyConfig.getEndpoint());
 
-            CACertificate caCertA = caClientA.getCertificate(userSecret, masterNymA, masterNymB);
-            CACertificate caCertB = caClientB.getCertificate(userSecret, masterNymA, masterNymB);
+            CACertificate caCert = caClient.getCertificate(userSecret, masterNymA, masterNymB);
             Log.d("doPseudonymSys", "Obtained CA Certificates");
 
             Pseudonymsys pseudonymClientA = new Pseudonymsys(emmyConfig.getEndpoint());
             Pseudonymsys pseudonymClientB = new Pseudonymsys(emmyConfig.getEndpoint());
 
-            Pseudonym pseudonymA = pseudonymClientA.registerWithOrg(userSecret, caCertA);
-            Pseudonym pseudonymB = pseudonymClientB.registerWithOrg(userSecret, caCertB);
+            Pseudonym pseudonymA = pseudonymClientA.registerWithOrg(userSecret, caCert);
+            Pseudonym pseudonymB = pseudonymClientB.registerWithOrg(userSecret, caCert);
             Log.d("doPseudonymSys", "Obtained Nyms for organizations A and B (REGISTRATION)");
 
             OrgPubKeys orgPubKeys = new OrgPubKeys(orgH1, orgH2);
