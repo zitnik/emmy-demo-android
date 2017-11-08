@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
             Credential credential = pseudonymClientA.obtainCredential(userSecret, pseudonymA, orgPubKeys);
             Log.d("doPseudonymSys", "Obtained Anonymous Credential for authentication with organization A " + credential.toString());
 
-            boolean result = pseudonymClientB.transferCredential("org1", userSecret, pseudonymB, credential);
+            boolean result = pseudonymClientB.transferCredential("orgX", userSecret, pseudonymB, credential);
             Log.d("doPseudonymSys", "Transferred Anonymous Credential for authentication with organization A, authenticated with organization B: " + result);
         } catch (Exception e) {
             e.printStackTrace();
